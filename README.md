@@ -1,5 +1,5 @@
 # PROTGOAT
-*** 
+
 [Manuscript](https://www.biorxiv.org/content/10.1101/2024.04.01.587572v1)
 
 Train and run inference with model for all three GO domains using CAFA5_Train_and_infer_f02.ipynb
