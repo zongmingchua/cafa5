@@ -1,0 +1,12 @@
+# Cellular Component. The smallest domain: the 800 most frequent CCO terms.
+
+ontology:
+  name: CCO
+  n_terms: 800
+  targets: Y_CC_800.npy
+  term_ids: Y_CC_labels_800.npy
+  ia_weights: CCO_800_freq_weights.csv
+  dag_matrix: CCO_800_DAG_matrix.npy
+
+  # Only used by the experimental hierarchy-aware loss; see configs/bpo.yaml.
+  output_split: [4, 11, 24, 59, 199]

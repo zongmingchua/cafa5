@@ -1,0 +1,14 @@
+# Biological Process. The largest and hardest domain, so it gets the widest
+# label space: the 1500 most frequent BPO terms in the training set.
+
+ontology:
+  name: BPO
+  n_terms: 1500
+  targets: Y_BP_1500.npy
+  term_ids: Y_BP_labels_1500.npy
+  ia_weights: BPO_1500_freq_weights.csv
+  dag_matrix: BPO_1500_DAG_matrix.npy
+
+  # Term counts per DAG depth; only used by the experimental hierarchy-aware
+  # loss in protgoat/hierarchy.py, which the submitted model did not use.
+  output_split: [13, 45, 102, 213, 465]

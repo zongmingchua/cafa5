@@ -1,0 +1,12 @@
+# Molecular Function: the 800 most frequent MFO terms.
+
+ontology:
+  name: MFO
+  n_terms: 800
+  targets: Y_MF_800.npy
+  term_ids: Y_MF_labels_800.npy
+  ia_weights: MFO_800_freq_weights.csv
+  dag_matrix: MFO_800_DAG_matrix.npy
+
+  # Only used by the experimental hierarchy-aware loss; see configs/bpo.yaml.
+  output_split: [4, 14, 28, 69, 176]

@@ -1,0 +1,71 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "protgoat"
+version = "1.0.0"
+description = "Protein function prediction from fused language model, taxonomy and literature features (4th place, CAFA5 2023)"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+keywords = ["bioinformatics", "protein function", "gene ontology", "CAFA"]
+classifiers = [
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering :: Bio-Informatics",
+]
+
+dependencies = [
+    "numpy>=1.23",
+    "pandas>=1.5",
+    "pyyaml>=6.0",
+    "scikit-learn>=1.2",
+    "scipy>=1.10",
+]
+
+[project.optional-dependencies]
+# Training and inference. Pinned below TensorFlow 2.16 because the saved
+# checkpoints are .hdf5 and Keras 3 no longer loads that format by default.
+train = ["tensorflow>=2.12,<2.16"]
+
+# Regenerating the input features from raw sequences and abstracts.
+embeddings = [
+    "ankh>=1.0",
+    "biopython>=1.81",
+    "nltk>=3.8",
+    "obonet>=1.0",
+    "torch>=2.0",
+]
+
+dev = ["pytest>=7.0", "ruff>=0.4"]
+
+[project.scripts]
+protgoat-train = "protgoat.cli:train_command"
+protgoat-predict = "protgoat.cli:predict_command"
+protgoat-merge = "protgoat.cli:merge_command"
+
+[project.urls]
+Manuscript = "https://www.biorxiv.org/content/10.1101/2024.04.01.587572v1"
+Data = "https://www.kaggle.com/datasets/zmcxjt/cafa5-train-test-data"
+Source = "https://github.com/zongmingchua/cafa5"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+# The per-ontology YAML configs must ship with the package; load_config()
+# resolves them relative to the installed module, not the source tree.
+protgoat = ["configs/*.yaml"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 90
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]

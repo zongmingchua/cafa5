@@ -1,0 +1,24 @@
+# Data, checkpoints and submissions are large and published separately;
+# see docs/data.md.
+data/
+*.npy
+*.npz
+*.hdf5
+*.keras
+*.tsv
+*.obo
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+
+# Tooling
+.pytest_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+.DS_Store

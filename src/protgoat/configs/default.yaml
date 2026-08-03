@@ -1,0 +1,36 @@
+# Settings shared by all three GO domains.
+# Values here reproduce the submitted 4th-place run; per-ontology label spaces
+# are defined in bpo.yaml / cco.yaml / mfo.yaml.
+
+version: f02
+
+training:
+  epochs: 20
+  batch_size: 256
+  learning_rate: 0.0003
+  dropout: 0.5
+  trunk_dim: 800
+  leaky_relu_alpha: 0.1
+
+  # The learning rate is halved every 10 epochs.
+  lr_decay_every: 10
+  lr_decay_factor: 0.5
+
+  # 5 folds x 5 seeds = 25 models averaged per ontology.
+  folds: 5
+  seeds: [1, 2, 3, 4, 5]
+
+  # Weight each term's loss by its information accretion, so that specific
+  # (rare) terms are not drowned out by the generic ones near the DAG root.
+  use_ia_weights: true
+
+  # Input modalities, in the order the model consumes them. Reordering these
+  # invalidates existing checkpoints. Drop a key to run an ablation.
+  features:
+    - t5
+    - esm2_small
+    - esm2_3b
+    - protbert
+    - ankh
+    - taxonomy
+    - abstracts
